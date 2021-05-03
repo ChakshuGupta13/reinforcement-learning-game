@@ -94,3 +94,10 @@ We have a 8x8 grid as the agent world and its environment abides by the below-me
   ```
 
 - After all the iterations of the `G`, I sort `pi_G` on the basis of the `pi_G[2]` i.e. `cost_pi` in increasing order, hence, `pi_G[1][1]` will be the most optimal policy with cost `pi_G[1][2]` and the agent's knowledge base will be `pi_G[1][3]`.
+
+## How to play the game?
+
+- First, note that the game implementation depends on Python, pygame and [pygame-text](https://github.com/cosmologicon/pygame-text).
+- Now, if all the dependencies are satisfies, run the [`main.py`](https://github.com/ChakshuGupta13/reinforcement-learning-game/blob/main/main.py) with the help of Python: `py main.py` in Windows or `python3 main.py` in Linux.
+- You will be asked to press `Enter` to the start the game, so, press `Enter` and observe the learning of the agent.
+- Game will automatically exit after its last iteration but if you want to quit in between press `Esc`.
