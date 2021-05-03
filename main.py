@@ -114,7 +114,7 @@ class AgentWorldEnv:
     Represents the agent world of the game and its environment.
     """
 
-    def __init__(self, goal: tuple, reward: float = -0.01,) -> None:
+    def __init__(self, goal: tuple, reward: float = -(1 / 47),) -> None:
         """
         Initialises the representation.
         """
