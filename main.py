@@ -348,9 +348,7 @@ def main() -> None:
         path_cost = 0
         while True:
             for event in pygame.event.get():
-                if (event.type == KEYDOWN and event.key == K_ESCAPE) or (
-                    event.type == QUIT
-                ):
+                if _is_cue_for_quit(event):
                     exit()
             reward = gameEnv.R(state)
             path_cost += reward
