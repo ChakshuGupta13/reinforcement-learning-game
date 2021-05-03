@@ -296,18 +296,41 @@ def _dir_char(action: tuple):
         return "N"
 
 
-def main() -> None:
-    start = False
-    while not start:
+def _is_cue_for_quit(event) -> bool:
+    """
+    Determines whether @event represents a cue from the user to quit the code run.
+    """
+    return (event.type == KEYDOWN and event.key == K_ESCAPE) or (event.type == QUIT)
+
+
+def _is_cue_for_start(event) -> bool:
+    """
+    Determines whether @event represents a cue from the user to start the game.
+    """
+    return event.type == KEYDOWN and event.key == K_RETURN
+
+
+def _wait_for_cue() -> None:
+    """
+    Allows the `main` method to wait for the user's cue to begin the game.
+    Where the user's s cue is: press the `Enter` key.
+    """
+    SCREEN.fill(WHITE)
+    ptext.draw("Press 'Enter' to begin the game.", (0, 0), color=BLACK)
+    pygame.display.update()
+    
+    game_started = False
+    while not game_started:
         for event in pygame.event.get():
-            if (event.type == KEYDOWN and event.key == K_ESCAPE) or (
-                event.type == QUIT
-            ):
+            if _is_cue_for_quit(event):
                 exit()
-            if event.type == KEYDOWN and event.key == K_RETURN:
-                start = True
+            if _is_cue_for_start(event):
+                game_started = True
                 break
 
+
+def main() -> None:
+    _wait_for_cue()
     goal = _random_goal()
     states = set()
     actions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
