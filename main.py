@@ -40,15 +40,6 @@ SCREEN = pygame.display.set_mode([0, 0])
 FONT = pygame.font.Font("freesansbold.ttf", 11)
 
 
-def _random_goal() -> tuple:
-    seq = []
-    for row in range(6, GRID_D + 1):
-        for col in range(6, GRID_D + 1):
-            if not _wall(row, col):
-                seq.append((row, col))
-    return choice(seq)
-
-
 def _draw_rect(rect, color: str, border_width: int = 0) -> None:
     pygame.draw.rect(SCREEN, color, rect, border_width)
 
@@ -327,6 +318,19 @@ def _wait_for_cue() -> None:
             if _is_cue_for_start(event):
                 game_started = True
                 break
+
+
+def _random_goal() -> tuple:
+    """
+    Return the goal cell or the terminal state:
+    A cell (x, y) where x, y belong in [6, 8] each and (x, y) is not a wall.
+    """
+    seq = []
+    for row in range(6, GRID_D + 1):
+        for col in range(6, GRID_D + 1):
+            if not _wall(row, col):
+                seq.append((row, col))
+    return choice(seq)
 
 
 def main() -> None:
