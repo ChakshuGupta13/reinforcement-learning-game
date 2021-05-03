@@ -251,21 +251,16 @@ class QLearningAgent:
                 * max(Q[state, action] for action in self.actions_in_state(state))
                 - Q[prev_state, prev_action]
             )
-        if prev_state == self.terminal_state:
-            self.prev_state = None
-            self.prev_action = None
-            self.prev_reward = None
-        else:
-            self.prev_state, self.prev_reward = state, reward
-            max_reward_possible = max(
-                self.f(Q[state, action], N[state, action])
-                for action in self.actions_in_state(state)
-            )
-            possible_actions = []
-            for action in self.actions_in_state(state):
-                if self.f(Q[state, action], N[state, action]) == max_reward_possible:
-                    possible_actions.append(action)
-            self.prev_action = deepcopy(choice(possible_actions))
+        self.prev_state, self.prev_reward = state, reward
+        max_possible_reward = max(
+            self.f(Q[state, action], N[state, action])
+            for action in self.actions_in_state(state)
+        )
+        possible_actions = []
+        for action in self.actions_in_state(state):
+            if self.f(Q[state, action], N[state, action]) == max_possible_reward:
+                possible_actions.append(action)
+        self.prev_action = deepcopy(choice(possible_actions))
         return self.prev_action
 
 
