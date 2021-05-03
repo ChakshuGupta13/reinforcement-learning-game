@@ -44,27 +44,6 @@ def _draw_rect(rect, color: str, border_width: int = 0) -> None:
     pygame.draw.rect(SCREEN, color, rect, border_width)
 
 
-def _wall(row: int, col: int) -> bool:
-    return (
-        (row == 2 and col == 3)
-        or (row == 3 and col == 3)
-        or (row == 3 and col == 5)
-        or (row == 3 and col == 6)
-        or (row == 3 and col == 7)
-        or (row == 3 and col == 8)
-        or (row == 5 and col == 2)
-        or (row == 5 and col == 3)
-        or (row == 5 and col == 4)
-        or (row == 5 and col == 5)
-        or (row == 5 and col == 7)
-        or (row == 6 and col == 7)
-        or (row == 6 and col == 5)
-        or (row == 7 and col == 5)
-        or (row == 7 and col == 2)
-        or (row == 8 and col == 2)
-    )
-
-
 class GameEnv:
     def __init__(
         self,
@@ -331,6 +310,30 @@ def _random_goal() -> tuple:
             if not _wall(row, col):
                 seq.append((row, col))
     return choice(seq)
+
+
+def _wall(row: int, col: int) -> bool:
+    """
+    Determines if the cell represented by (@row, @col) is a wall.
+    """
+    return (
+        (row == 2 and col == 3)
+        or (row == 3 and col == 3)
+        or (row == 3 and col == 5)
+        or (row == 3 and col == 6)
+        or (row == 3 and col == 7)
+        or (row == 3 and col == 8)
+        or (row == 5 and col == 2)
+        or (row == 5 and col == 3)
+        or (row == 5 and col == 4)
+        or (row == 5 and col == 5)
+        or (row == 5 and col == 7)
+        or (row == 6 and col == 7)
+        or (row == 6 and col == 5)
+        or (row == 7 and col == 5)
+        or (row == 7 and col == 2)
+        or (row == 8 and col == 2)
+    )
 
 
 def main() -> None:
